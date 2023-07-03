@@ -47,6 +47,10 @@ body {
   border-radius: 30px;
 }
 
+.btn-mn .value{
+  text-decoration: none;
+}
+
 .btns a:link{
   text-decoration: none;
 }
@@ -354,7 +358,7 @@ footer {
   color: #ffffff;
 }
 .card-lines-btn {
-  margin: 0;
+  margin-top: 20px ;
 }
 .card-lines-icons {
   display: flex;
