@@ -1,0 +1,270 @@
+$color-main: #e0c14d;
+$color-sec: #ffffff;
+$color-hover: #e0564d;
+$color-animation: #ff1100;
+$color-textfield: rgba(217, 217, 217, 0.71);
+$color-subText: #BEBEBE;
+$color-bars: #FABB05;
+
+body {
+    background: linear-gradient(90deg,
+            #191948 2.6%,
+            #090d25 31.77%,
+            #191948 50%,
+            #090d25 68.23%,
+            #191948 100%);
+}
+
+.btn-pr {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 122px;
+    height: 33px;
+    flex-shrink: 0;
+    text-align: center;
+    border-radius: 20px;
+    border: 5px solid $color-main;
+    background-color: transparent;
+    color: $color-main;
+    font-size: 20px;
+    font-weight: 700;
+
+    &:hover {
+        cursor: pointer;
+        border: 5px solid $color-hover;
+        color: $color-hover;
+    }
+
+    &-sec {
+        @extend .btn-pr;
+        color: $color-sec;
+        font-size: 20px;
+        border: 3px solid $color-sec;
+    }
+}
+
+.btn-mn{
+    display: flex;
+    width: 203px;
+    height: 55px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    background: linear-gradient(180deg, #3F0D50 0%, rgba(79, 96, 255, 0.00) 100%);
+    color: $color-sec;
+    border-color: $color-sec;
+    margin: 0;
+    padding: 0;
+    border-radius: 30px;
+}
+
+.icon:hover {
+    cursor: pointer;
+    animation: shadow-animation 0.5s infinite alternate;
+}
+
+.menu {
+    width: 600px;
+    height: 800px;
+    flex-shrink: 0;
+    display: none;
+    position: absolute;
+    top: 12%;
+    padding: 10px;
+    background-color: #0D1030;
+    opacity: 0.6;
+    border: 1px solid #ccc;
+    z-index: 1;
+
+    li{
+        color: $color-sec;
+
+        &:hover{
+            background-color: #3F0D50;
+            color: $color-bars
+        }
+    };
+}
+  
+.menu li {
+list-style: none;
+padding: 5px 0;
+}
+
+.txt1{
+    color: $color-sec;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.txt10{
+    color: $color-sec;
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.txt2{
+    color: $color-main;
+    text-align: center;
+    font-size: 19px;
+    font-weight: 700;
+
+    &:hover {
+        cursor: pointer;
+        color: $color-hover;
+    }
+}
+
+@keyframes shadow-animation {
+    0% {
+        box-shadow: none;
+    }
+
+    50% {
+        box-shadow: 0 0 10px rgba($color-animation, 0.7);
+    }
+
+    100% {
+        box-shadow: none;
+    }
+}
+
+.card{
+    width: 662px;
+    height: 425px;
+    background-color: transparent;
+
+    &-bg{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("../img/cardLines.png");
+        background-size: cover;
+        background-position: center;
+        z-index: -1; /* Envia la imagen d
+        e fondo al fondo del card */
+        &-2{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 152%;
+            background-image: url("../img/cardLines3.png");
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+
+        &-3{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 152%;
+            background-image: url("../img/cardLines4.png");
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+
+    }
+
+}
+
+.card-float{
+    @extend .card;
+}
+
+.input{
+    border-radius: 100px;
+    background: $color-textfield;
+    width: 431px;
+    height: 35px;
+    flex-shrink: 0;
+}
+
+.txt3 {
+    color: $color-sec;
+    font-size: 20px;
+}
+
+.txt4 {
+    color: $color-subText;
+    font-size: 14px;
+    font-family: Inter;
+}
+
+.txt5 {
+    color: $color-bars;
+    font-size: 12px;
+    font-family: Inter;
+}
+
+
+.progress-bar{
+    color: $color-bars;
+}
+
+.number-bg{
+    border-radius: 68px;
+    background-color: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../img/Ellipse\ 1.svg");
+    background-size: cover;
+    background-position: center;
+    z-index: -1; /* Envia la imagen de fondo al fondo del card */
+
+}
+
+.txtCircle {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: transparent; /* Fondo transparente */
+    border: 2px solid $color-bars; /* Borde fino */
+    color: $color-sec; /* Color del texto */
+    font-size: 24px;
+    text-align: center;
+    width: 60px;
+    height: 60px;
+    line-height: 1;
+}
+
+.moviePortada{
+    border-radius: 20px;
+    border: 1px solid #000;
+}
+
+
+.lines{
+    width: 100%;
+}
+
+.bloqueimg{
+    width: 100%;
+    height: 100%;
+    margin-top: 0.01px;
+    opacity: 0.2;
+    
+}
+
+
+
+footer{
+    background-color: #070707;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 96px;
+    color: $color-sec;
+}
