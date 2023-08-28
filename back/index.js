@@ -88,16 +88,52 @@ expressApp.get("/movies/:item_id", (req, res) => {
 expressApp.post("/movies/create", (req, res) => {
     (async () => {
         try {
-        console.log(req.body)
-        console.log(req.body.movie);
-        const docRef = await addDoc(collection(db, "movies"), req.body.movie);
-        return res.status(200).send(`Document written with ID:  ${docRef.id}`);
+            console.log(req.body)
+            console.log(req.body.movie);
+            const docRef = await addDoc(collection(db, "movies"), req.body.movie);
+            return res.status(200).send(`Document written with ID:  ${docRef.id}`);
         } catch (error) {
-        console.log(error);
-        return res.status(500).send(error);
+            console.log(error);
+            return res.status(500).send(error);
         }
     })();
-    });
+});
+
+//UPDATE MOVIE
+expressApp.put('/movies/update/:item_id', (req, res) => {
+    (async () => {
+      try {
+        let response = [];
+        console.log("Updating " + req.params.item_id)
+        const q = query(
+          collection(db, "movies"),
+          where("id", "==", req.params.item_id)
+        );
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+          const selectedItem = {
+            id: doc.id,
+            movie: doc.data(),
+          };
+          response.push(selectedItem);
+        });
+        if (response.length > 0) {
+            console.log(response)
+            console.log(response[0].movie.id)
+            const movieDocument = doc(db, "movies", response[0].id);
+            console.log(movieDocument)  
+            await updateDoc(movieDocument, req.body.movie);
+            return res.status(200).send();
+        } else {
+            console.log("Document not found");
+            return res.status(404).send("Document not found");
+        }
+      } catch (error) {
+          console.log(error);
+          return res.status(500).send(error);
+      }
+      })();
+  });
 
 // async function uploadMovie() {
 //     try {
