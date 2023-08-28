@@ -1,5 +1,5 @@
 const { initializeApp } = require('firebase/app');
-const { getFirestore, collection, getDocs, query, where, addDoc, deleteDoc, doc, updateDoc  } = require('firebase/firestore/lite');
+const { getFirestore, collection, getDocs, query, where, addDoc, deleteDoc, doc, updateDoc } = require('firebase/firestore/lite');
 
 
 const firebaseConfig = {
@@ -9,8 +9,8 @@ const firebaseConfig = {
     storageBucket: "youflix-f4695.appspot.com",
     messagingSenderId: "323163076768",
     appId: "1:323163076768:web:dd5ba46e5819370da0b1c5"
-  };
-  
+};
+
 const firebaseApp = initializeApp(firebaseConfig);
 
 const db = getFirestore(firebaseApp);
@@ -23,11 +23,11 @@ expressApp.use(cors())
 expressApp.use(express.json());
 
 expressApp.get('/', (req, res) => {
-  res.send('Hello World!')
+    res.send('Hello World!')
 })
 
 expressApp.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+    console.log(`Example app listening on port ${port}`)
 })
 
 async function getMovies(db) {
@@ -35,18 +35,55 @@ async function getMovies(db) {
     const moviesSnapshot = await getDocs(movies);
     const moviesList = moviesSnapshot.docs.map(doc => doc.data());
     return moviesList;
-  }
+}
 
-expressApp.get('/api/read', async (req, res) => {
+//READ ALL MOVIES
+expressApp.get('/movies', async (req, res) => {
     try {
-      const movies = await getMovies(db);
-      console.log(movies);
-      res.send(movies); // Send the movies data as the response
+        const movies = await getMovies(db);
+        console.log(movies);
+        res.send(movies);
     } catch (error) {
-      console.error('Error retrieving movies:', error);
-      res.status(500).send('Error retrieving movies'); // Send an error response if there's an issue with data retrieval
+        console.error('Error retrieving movies:', error);
+        res.status(500).send('Error retrieving movies');
     }
 });
+
+//READ ONE MOVIE
+expressApp.get("/movies/:item_id", (req, res) => {
+    (async () => {
+        try {
+            let response = [];
+            console.log("looking for " + req.params.item_id);
+
+            const q = query(
+                collection(db, "movies"),
+                where("id", "==", req.params.item_id)
+            );
+
+            const querySnapshot = await getDocs(q);
+
+            querySnapshot.forEach((doc) => {
+                const selectedItem = {
+                    movie: doc.data(),
+                };
+                response.push(selectedItem);
+            });
+
+            if (response.length > 0) {
+                console.log(response);
+                return res.status(200).send(response);
+            } else {
+                console.log("Document not found");
+                return res.status(404).send("Document not found");
+            }
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send(error);
+        }
+    })();
+});
+
 
 /*
 async function uploadMovie() {
