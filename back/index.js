@@ -30,7 +30,25 @@ expressApp.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
 
+async function getMovies(db) {
+    const movies = collection(db, 'movies');
+    const moviesSnapshot = await getDocs(movies);
+    const moviesList = moviesSnapshot.docs.map(doc => doc.data());
+    return moviesList;
+  }
 
+expressApp.get('/api/read', async (req, res) => {
+    try {
+      const movies = await getMovies(db);
+      console.log(movies);
+      res.send(movies); // Send the movies data as the response
+    } catch (error) {
+      console.error('Error retrieving movies:', error);
+      res.status(500).send('Error retrieving movies'); // Send an error response if there's an issue with data retrieval
+    }
+});
+
+/*
 async function uploadMovie() {
     try {
     const docRef = await addDoc(collection(db, "movies"), {
@@ -69,3 +87,4 @@ async function uploadMovie() {
 };
 
 uploadMovie();
+*/
