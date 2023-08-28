@@ -41,7 +41,6 @@ async function getMovies(db) {
 expressApp.get('/movies', async (req, res) => {
     try {
         const movies = await getMovies(db);
-        console.log(movies);
         res.send(movies);
     } catch (error) {
         console.error('Error retrieving movies:', error);
@@ -54,7 +53,6 @@ expressApp.get("/movies/:item_id", (req, res) => {
     (async () => {
         try {
             let response = [];
-            console.log("looking for " + req.params.item_id);
 
             const q = query(
                 collection(db, "movies"),
@@ -71,7 +69,6 @@ expressApp.get("/movies/:item_id", (req, res) => {
             });
 
             if (response.length > 0) {
-                console.log(response);
                 return res.status(200).send(response);
             } else {
                 console.log("Document not found");
@@ -88,8 +85,6 @@ expressApp.get("/movies/:item_id", (req, res) => {
 expressApp.post("/movies/create", (req, res) => {
     (async () => {
         try {
-            console.log(req.body)
-            console.log(req.body.movie);
             const docRef = await addDoc(collection(db, "movies"), req.body.movie);
             return res.status(200).send(`Document written with ID:  ${docRef.id}`);
         } catch (error) {
@@ -102,38 +97,59 @@ expressApp.post("/movies/create", (req, res) => {
 //UPDATE MOVIE
 expressApp.put('/movies/update/:item_id', (req, res) => {
     (async () => {
-      try {
-        let response = [];
-        console.log("Updating " + req.params.item_id)
-        const q = query(
-          collection(db, "movies"),
-          where("id", "==", req.params.item_id)
-        );
-        const querySnapshot = await getDocs(q);
-        querySnapshot.forEach((doc) => {
-          const selectedItem = {
-            id: doc.id,
-            movie: doc.data(),
-          };
-          response.push(selectedItem);
-        });
-        if (response.length > 0) {
-            console.log(response)
-            console.log(response[0].movie.id)
-            const movieDocument = doc(db, "movies", response[0].id);
-            console.log(movieDocument)  
-            await updateDoc(movieDocument, req.body.movie);
-            return res.status(200).send();
-        } else {
-            console.log("Document not found");
-            return res.status(404).send("Document not found");
+        try {
+            let response = [];
+            const q = query(
+                collection(db, "movies"),
+                where("id", "==", req.params.item_id)
+            );
+            const querySnapshot = await getDocs(q);
+            querySnapshot.forEach((doc) => {
+                const selectedItem = {
+                    id: doc.id,
+                    movie: doc.data(),
+                };
+                response.push(selectedItem);
+            });
+            if (response.length > 0) {
+                const movieDocument = doc(db, "movies", response[0].id);
+                await updateDoc(movieDocument, req.body.movie);
+                return res.status(200).send();
+            } else {
+                console.log("Document not found");
+                return res.status(404).send("Document not found");
+            }
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send(error);
         }
-      } catch (error) {
-          console.log(error);
-          return res.status(500).send(error);
-      }
-      })();
-  });
+    })();
+});
+
+expressApp.delete("/movies/delete/:item_id", (req, res) => {
+    (async () => {
+        try {
+
+            const q = query(
+                collection(db, "movies"),
+                where("id", "==", req.params.item_id)
+            );
+            const querySnapshot = await getDocs(q);
+            if (querySnapshot.empty) {
+                return res.status(404).send("Document not found");
+            }
+
+            const docId = querySnapshot.docs[0].id;
+            const movieDocument = doc(db, "movies", docId);
+            await deleteDoc(movieDocument);
+            return res.status(200).send();
+
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send(error);
+        }
+    })();
+});
 
 // async function uploadMovie() {
 //     try {
