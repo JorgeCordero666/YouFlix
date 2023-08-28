@@ -20,7 +20,8 @@ async function readAllMovies() {
 
 async function readOneMovie() {
     try {
-        let item_id = "guardians3";
+        let item_id = "dragonhiddenworld";
+        //let item_id = "guardians3";
         //let item_id = "spiderverse";
         const response = await fetch("http://localhost:3000/movies/" + item_id);
 

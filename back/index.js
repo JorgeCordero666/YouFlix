@@ -84,6 +84,20 @@ expressApp.get("/movies/:item_id", (req, res) => {
     })();
 });
 
+//CREATE ONE MOVIE
+expressApp.post("/movies/create", (req, res) => {
+    (async () => {
+        try {
+        console.log(req.body)
+        console.log(req.body.movie);
+        const docRef = await addDoc(collection(db, "movies"), req.body.movie);
+        return res.status(200).send(`Document written with ID:  ${docRef.id}`);
+        } catch (error) {
+        console.log(error);
+        return res.status(500).send(error);
+        }
+    })();
+    });
 
 // async function uploadMovie() {
 //     try {
