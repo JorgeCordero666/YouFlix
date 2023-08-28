@@ -85,43 +85,36 @@ expressApp.get("/movies/:item_id", (req, res) => {
 });
 
 
-/*
-async function uploadMovie() {
-    try {
-    const docRef = await addDoc(collection(db, "movies"), {
-        "title" : 'Guardians of the Galaxy Vol. 3',
-        "directorName":'James Gunn',
-        "year":'5/5/2023',
-        "time":'2h 30m',
-        "sinopsis": 'Peter Quill, still reeling from the loss of Gamora, must rally his team around him to defend the universe along with protecting one of their own. A mission that, if not completed successfully, could quite possibly lead to the end of the Guardians as we know them.',
-        "genres": ['Science Fiction','Adventure','Action'],
-        "country": 'US',
-        "rating": 8.5,
-        "reviews": [40,30,20,8,2],
-        "comentarios": [
-            {
-              "usuario": "Julieta Vargas",
-              "comentario": "Me gusto mucho la película a pesar de que aun no haya visto la anterior 😅"
-            },
-            {
-              "usuario": "Angelica Rodriguezs",
-              "comentario": "Muy buen sitio de películas, siempre encuentro algo para ver 😃"
-            },
-            {
-              "usuario": "Xavier Paredes",
-              "comentario": "No alcance a verla en el cine pero esta super buena 🤠"
-            },
-            {
-              "usuario": "Samuel Flores",
-              "comentario": "Marvel ya no hace buenas películas como antes 🤧"
-            }
-          ],
-        "img_url": "https://firebasestorage.googleapis.com/v0/b/youflix-f4695.appspot.com/o/portadas%2Fmovie1.png?alt=media&token=ca24f878-ea56-4416-a9e4-1fe33470f150"
-    });
-    } catch (error) {
-    console.log(error);
-    }
-};
+// async function uploadMovie() {
+//     try {
+//     const docRef = await addDoc(collection(db, "movies"), {
+//         "title" : 'Spider-Man: Across the Spider-Verse ',
+//         "directorName":'Kemp Powers',
+//         "year":'1/6/2023 ',
+//         "time":'2h 20m',
+//         "sinopsis": 'After reuniting with Gwen Stacy, Brooklyn’s full-time, friendly neighborhood Spider-Man is catapulted across the Multiverse, where he encounters the Spider Society, a team of Spider-People charged with protecting the Multiverse’s very existence. But when the heroes clash on how to handle a new threat, Miles finds himself pitted against the other Spiders and must set out on his own to save those he loves most.',
+//         "genres": ['Animation',' Action','Adventure'],
+//         "country": 'US',
+//         "rating": 8.3,
+//         "reviews": [42,34,18,5,1],
+//         "comentarios": [
+//             {
+//               "usuario": "Julieta Vargas",
+//               "comentario": "Me gusto mucho la película a pesar de que aun no haya visto la anterior 😅",
+//               "img": "https://firebasestorage.googleapis.com/v0/b/youflix-f4695.appspot.com/o/portadas%2FEllipse%209.png?alt=media&token=b71cd850-9dc7-4b37-ba40-f9933d91f026"
+//             },
+//             {
+//               "usuario": "Angelica Rodriguezs",
+//               "comentario": "Muy buen sitio de películas, siempre encuentro algo para ver 😃",
+//               "img": "https://firebasestorage.googleapis.com/v0/b/youflix-f4695.appspot.com/o/portadas%2FEllipse%2010.png?alt=media&token=8e67bc36-a75e-4b05-8785-1fd1e4327747"
+//             }
+//           ],
+//         "img_url": "https://firebasestorage.googleapis.com/v0/b/youflix-f4695.appspot.com/o/portadas%2Fportada_02.jpg?alt=media&token=df602d50-5202-4825-8a82-1cbd62aa87c6",
+//         "id" : "spiderverse"
+//     });
+//     } catch (error) {
+//     console.log(error);
+//     }
+// };
 
-uploadMovie();
-*/
+// uploadMovie();
