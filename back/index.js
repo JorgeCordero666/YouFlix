@@ -3,13 +3,13 @@ const { getFirestore, collection, getDocs, query, where, addDoc, deleteDoc, doc,
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBgea9tIv88lOtqJHBS9vT0KNs8o5qzT6c",
-    authDomain: "youflix-f4695.firebaseapp.com",
-    projectId: "youflix-f4695",
-    storageBucket: "youflix-f4695.appspot.com",
-    messagingSenderId: "323163076768",
-    appId: "1:323163076768:web:dd5ba46e5819370da0b1c5"
-};
+    apiKey: "AIzaSyCvi-uF1tbyDIjKIZic7jwISlnmzQJ4pzY",
+    authDomain: "youflix-6f8e4.firebaseapp.com",
+    projectId: "youflix-6f8e4",
+    storageBucket: "youflix-6f8e4.appspot.com",
+    messagingSenderId: "285493117970",
+    appId: "1:285493117970:web:3373d5841922f3b75744cb"
+  };
 
 const firebaseApp = initializeApp(firebaseConfig);
 
