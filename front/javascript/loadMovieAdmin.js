@@ -1,6 +1,8 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     readAllMovies();
+    const addMovieButton = document.getElementById("addMovieButton");
+    const addMovieForm = document.getElementById("addMovieForm");
 });
 
 async function readAllMovies() {
@@ -203,6 +205,21 @@ function abrirVentanaModal(movie) {
 
     // Obtén el elemento editForm después de haberlo agregado al DOM
     const editForm = document.getElementById("editForm");
+    const deleteCommentButtons = document.querySelectorAll(".btn-danger");
+
+    deleteCommentButtons.forEach((button, index) => {
+        button.addEventListener("click", () => {
+            // Obtén el comentario que se va a borrar
+            const commentToDelete = movie.comentarios[index];
+    
+            // Elimina el comentario del arreglo de comentarios de la película
+            movie.comentarios.splice(index, 1);
+    
+            // Actualiza la lista de comentarios en el modal
+            const commentList = document.querySelector(".modal-body ul");
+            commentList.removeChild(commentList.children[index]);
+        });
+    });
 
     // Escucha el evento de envío del formulario y realiza una solicitud PUT a la API para actualizar la información
     editForm.addEventListener("submit", (e) => {
@@ -230,98 +247,175 @@ function abrirVentanaModal(movie) {
 
         console.log(movie)
         // Realiza una solicitud PUT a la API para actualizar la información
-        fetch(`http://localhost:3000/movies/update/${movie.id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(movie)
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                // Si la actualización fue exitosa, puedes mostrar un mensaje de éxito o realizar otras acciones necesarias
-                console.log("Información actualizada con éxito:", data);
+        // ...
+fetch(`http://localhost:3000/movies/update/${movie.id}`, {
+    method: "PUT",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify(movie)
+})
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error("La solicitud no fue exitosa");
+        }
+        return response.json(); // Intenta analizar la respuesta como JSON solo si es exitosa
+    })
+    .then((data) => {
+        // Si la actualización fue exitosa, puedes mostrar un mensaje de éxito o realizar otras acciones necesarias
+        console.log("Información actualizada con éxito:", data);
 
-                // Cierra la ventana modal después de actualizar
-                bootstrapModal.hide();
-            })
-            .catch((error) => {
-                console.error("Error al actualizar la información:", error);
-            });
+        // Cierra la ventana modal después de actualizar
+        bootstrapModal.hide();
+    })
+    .catch((error) => {
+        console.error("Error al actualizar la información:", error);
+    });
+// ...
+
     });
 }
 
 // ...
 
 // Obtén una referencia al botón "Agregar Película"
-const addMovieButton = document.getElementById("addMovieButton");
+addMovieButton = document.getElementById("addMovieButton");
 
 // Agrega un evento de clic al botón "Agregar Película" para mostrar el modal de creación
 addMovieButton.addEventListener("click", () => {
-  // Mostrar el modal de creación de película
-  const addMovieModal = new bootstrap.Modal(document.getElementById("addMovieModal"));
-  addMovieModal.show();
-});
+    // Mostrar el modal de creación de película
+    // Obtén una referencia al elemento modal en tu HTML
+    const modal = document.getElementById("myModal");
 
-// Obtén una referencia al formulario de creación de película
-const addMovieForm = document.getElementById("addMovieForm");
+    // Modifica el contenido de la ventana modal con la información de la película
+    const modalContent = document.getElementById("modal-content");
 
+    modalContent.innerHTML = `
+     <div class="modal-header">
+       <h5 class="modal-title">NUEVA PLEICULA</h5>
+       <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+     </div>
+     <div class="modal-body">
+      
+       <form id="addMovieForm">
+       <div class="mb-3">
+       <label for="title" class="form-label">Identificador</label>
+       <input type="text" class="form-control" id="id">
+     </div>
+         <div class="mb-3">
+           <label for="title" class="form-label">Título</label>
+           <input type="text" class="form-control" id="title">
+         </div>
+         <div class="mb-3">
+           <label for="director" class="form-label">Director</label>
+           <input type="text" class="form-control" id="director">
+         </div>
+         <div class="mb-3">
+           <label for="country" class="form-label">País</label>
+           <input type="text" class="form-control" id="country">
+         </div>
+         <div class="mb-3">
+           <label for="year" class="form-label">Año</label>
+           <input type="text" class="form-control" id="year">
+         </div>
+         <div class="mb-3">
+           <label for="time" class="form-label">Duración</label>
+           <input type="text" class="form-control" id="time">
+         </div>
+         <div class="mb-3">
+           <label for="rating" class="form-label">Rating</label>
+           <input type="text" class="form-control" id="rating">
+         </div>
+         <div class="mb-3">
+           <label for="sinopsis" class="form-label">Sinopsis</label>
+           <textarea class="form-control" id="sinopsis"></textarea>
+         </div>
+
+       
+ 
+         <div class="mb-3">
+           <label for="generos" class="form-label">Géneros</label>
+           <input type="text" class="form-control" id="genres">
+         </div>
+ 
+         <button type="submit" class="btn btn-primary">Guardar cambios</button>
+       </form>
+     </div>
+   `;
+
+    const bootstrapModal = new bootstrap.Modal(modal);
+    bootstrapModal.show();
+
+    // Obtén una referencia al formulario de creación de película
+    addMovieForm = document.getElementById("addMovieForm");
+    
 // Agrega un evento de envío al formulario de creación de película
 addMovieForm.addEventListener("submit", (e) => {
-  e.preventDefault(); // Evita que se envíe el formulario de forma predeterminada
+    e.preventDefault(); // Evita que se envíe el formulario de forma predeterminada
 
-  // Obtiene los valores del formulario de creación de película
-  const title = document.getElementById("title").value;
-  const director = document.getElementById("director").value;
-  // Agrega más campos según tus necesidades
+    // Obtiene los valores del formulario de creación de película
+    const id = document.getElementById("id").value;
+    const title = document.getElementById("title").value;
+    const director = document.getElementById("director").value;
+    const country = document.getElementById("country").value;
+    const year = document.getElementById("year").value;
+    const rating = document.getElementById("rating").value;
+    const sinopsis = document.getElementById("sinopsis").value;
+    const genres = document.getElementById("genres").value;
+    const time = document.getElementById("time").value;
+    // Agrega más campos según tus necesidades
 
-  // Crea un objeto de película con los datos del formulario
-  const newMovie = {
-    movie: {
-      country: "",
-      reviews: [], // Puedes dejarlo vacío o agregar valores si es necesario
-      directorName: director,
-      year: "", // Puedes agregar el año aquí
-      img_url: "",
-      rating: 0, // Puedes agregar la calificación aquí
-      time: "", // Puedes agregar la duración aquí
-      id: "", // Puedes agregar un ID único aquí
-      title: title,
-      comentarios: [], // Puedes dejarlo vacío o agregar comentarios si es necesario
-      sinopsis: "", // Puedes agregar la sinopsis aquí
-      genres: [], // Puedes dejarlo vacío o agregar géneros si es necesario
-    },
-  };
-
-  // Realiza una solicitud POST a la API para crear una nueva película
-  fetch("http://localhost:3000/movies/create", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(newMovie),
-  })
-    .then((response) => {
-      if (response.ok) {
-        // Si la creación fue exitosa, puedes realizar acciones adicionales aquí
-        console.log("Película creada con éxito.");
-        // Cerrar el modal de creación de película
-        addMovieModal.hide();
-        // Actualizar la interfaz de usuario, por ejemplo, recargar las tarjetas de películas
-        // (debes implementar esta parte según tu estructura)
-      } else {
-        // Si hubo un error al crear la película, muestra un mensaje de error
-        console.error("Error al crear la película.");
-        // Cerrar el modal de creación de película
-        addMovieModal.hide();
-      }
+    // Crea un objeto de película con los datos del formulario
+    const newMovie = {
+        movie: {
+            title: title,
+            directorName: director,
+            year: year,
+            time: time,
+            sinopsis: sinopsis,
+            genres: genres,// Puedes dejarlo vacío o agregar géneros si es necesario
+            country: country,
+            rating: rating, // Puedes agregar la calificación aquí
+            reviews: [], // Puedes dejarlo vacío o agregar valores si es necesario
+            comentarios: [], // Puedes dejarlo vacío o agregar comentarios si es necesario
+            img_url: "",
+            id: id
+        },
+    };
+    console.log(newMovie)
+    // Realiza una solicitud POST a la API para crear una nueva película
+    fetch("http://localhost:3000/movies/create", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newMovie),
     })
-    .catch((error) => {
-      console.error("Error al crear la película:", error);
-      // Cerrar el modal de creación de película en caso de error
-      addMovieModal.hide();
-    });
+        .then((response) => {
+            if (response.ok) {
+                // Si la creación fue exitosa, puedes realizar acciones adicionales aquí
+                console.log("Película creada con éxito.");
+                // Cerrar el modal de creación de película
+                bootstrapModal.hide();
+                // Actualizar la interfaz de usuario, por ejemplo, recargar las tarjetas de películas
+                // (debes implementar esta parte según tu estructura)
+            } else {
+                // Si hubo un error al crear la película, muestra un mensaje de error
+                console.error("Error al crear la película.");
+                // Cerrar el bootstrapModal de creación de película
+                bootstrapModal.hide();
+            }
+        })
+        .catch((error) => {
+            console.error("Error al crear la película:", error);
+            // Cerrar el bootstrapModal de creación de película en caso de error
+            bootstrapModal.hide();
+        });
 });
+
+});
+
+
 
 // ...
 
