@@ -471,4 +471,9 @@ footer {
   cursor: pointer;
 }
 
+.mini-img-portrait{
+  width: 70px; /* Ancho deseado para el ícono */
+  height: 70px; /* Alto deseado para el ícono */
+  margin-right: 8px; /* Espacio entre el ícono y el título de la película */
+}
 /*# sourceMappingURL=styles.css.map */

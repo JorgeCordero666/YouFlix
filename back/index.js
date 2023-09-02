@@ -113,7 +113,7 @@ expressApp.put('/movies/update/:item_id', (req, res) => {
             });
             if (response.length > 0) {
                 const movieDocument = doc(db, "movies", response[0].id);
-                await updateDoc(movieDocument, req.body.movie);
+                await updateDoc(movieDocument, req.body);
                 return res.status(200).send();
             } else {
                 console.log("Document not found");
