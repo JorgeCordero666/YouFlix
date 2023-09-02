@@ -155,31 +155,35 @@ function abrirVentanaModal(movie) {
           </div>
           <div class="mb-3">
             <label for="title" class="form-label">Título</label>
-            <input type="text" class="form-control" id="title" value="${movie.title}">
+            <input type="text" class="form-control" id="title" value="${movie.title}" required>
           </div>
           <div class="mb-3">
             <label for="director" class="form-label">Director</label>
-            <input type="text" class="form-control" id="director" value="${movie.directorName}">
+            <input type="text" class="form-control" id="director" value="${movie.directorName}" required>
           </div>
           <div class="mb-3">
             <label for="country" class="form-label">País</label>
-            <input type="text" class="form-control" id="country" value="${movie.country}">
+            <input type="text" class="form-control" id="country" value="${movie.country}" required>
           </div>
           <div class="mb-3">
             <label for="year" class="form-label">Año</label>
-            <input type="text" class="form-control" id="year" value="${movie.year}">
+            <input type="text" class="form-control" id="year" value="${movie.year}" required>
           </div>
           <div class="mb-3">
-            <label for="time" class="form-label">Duración (hh:mm)</label>
-            <input type="text" class="form-control" id="time" value="${movie.time}">
+            <label for="hour" class="form-label">Hora (hh)</label>
+            <input type="text" class="form-control" id="hour" value="${movie.time.split(' ')[0]}" pattern="^[0-9]{1,2}$" required>
+          </div>
+          <div class="mb-3">
+            <label for="minutes" class="form-label">Minutos (mm)</label>
+            <input type="text" class="form-control" id="minutes" value="${movie.time.split(' ')[1]}" pattern="^[0-5][0-9]$" required>
           </div>
           <div class="mb-3">
             <label for="rating" class="form-label">Rating (0-10)</label>
-            <input type="text" class="form-control" id="rating" value="${movie.rating}">
+            <input type="number" class="form-control" id="rating" value="${movie.rating}" min="0" max="10" step="0.1" required>
           </div>
           <div class="mb-3">
             <label for="sinopsis" class="form-label">Sinopsis</label>
-            <textarea class="form-control" id="sinopsis">${movie.sinopsis}</textarea>
+            <textarea class="form-control" id="sinopsis" required>${movie.sinopsis}</textarea>
           </div>
 
           <p><strong>Comentarios:</strong></p>
@@ -195,12 +199,12 @@ function abrirVentanaModal(movie) {
 
           <div class="mb-3">
             <label for="generos" class="form-label">Géneros</label>
-            <input type="text" class="form-control" id="generos" value="${movie.genres.join(", ")}">
+            <input type="text" class="form-control" id="generos" value="${movie.genres.join(", ")}" required>
           </div>
 
           <div class="mb-3">
             <label for="img_url" class="form-label">URL de la imagen</label>
-            <input type="text" class="form-control" id="img_url" value="${movie.img_url}">
+            <input type="url" class="form-control" id="img_url" value="${movie.img_url}" required>
           </div>
 
           <button type="submit" class="btn btn-primary">Guardar cambios</button>
@@ -218,17 +222,28 @@ function abrirVentanaModal(movie) {
         e.preventDefault(); // Evita que se envíe el formulario de forma predeterminada
 
         // Obtiene los valores actualizados de los campos de edición
+        const updatedId = document.getElementById("id").value;
         const updatedTitle = document.getElementById("title").value;
         const updatedDirector = document.getElementById("director").value;
         const updatedCountry = document.getElementById("country").value;
         const updatedYear = document.getElementById("year").value;
-        const updatedTime = document.getElementById("time").value;
+        const updatedHour = document.getElementById("hour").value;
+        const updatedMinutes = document.getElementById("minutes").value;
         const updatedRating = document.getElementById("rating").value;
         const updatedSinopsis = document.getElementById("sinopsis").value;
         const updatedGenres = document.getElementById("generos").value.split(",").map((genre) => genre.trim());
         const updatedImgUrl = document.getElementById("img_url").value;
 
+        // Valida que la hora y los minutos tengan un formato válido
+        if (!validateTime(updatedHour, updatedMinutes)) {
+            return;
+        }
+
+        // Crea una cadena de tiempo válida
+        const updatedTime = `${updatedHour.padStart(2, "0")}:${updatedMinutes.padStart(2, "0")}`;
+
         // Actualiza los valores de la película
+        movie.id = updatedId;
         movie.title = updatedTitle;
         movie.directorName = updatedDirector;
         movie.country = updatedCountry;
@@ -278,6 +293,20 @@ function abrirVentanaModal(movie) {
         });
     });
 }
+
+// Función para validar el formato de tiempo (hh:mm)
+function validateTime(hour, minutes) {
+    const hourPattern = /^[0-9]{1,2}$/;
+    const minutesPattern = /^[0-5][0-9]$/;
+
+    if (!hourPattern.test(hour) || !minutesPattern.test(minutes)) {
+        alert("El formato de tiempo es incorrecto. Debe ser hh:mm (por ejemplo, 09:30).");
+        return false;
+    }
+
+    return true;
+}
+
 
 
 // ...
