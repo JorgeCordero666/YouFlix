@@ -2,9 +2,10 @@ document.addEventListener("DOMContentLoaded", () => {
     //readAllMovies();
     readOneMovie();
 });
-
+// Función para cargar información de todas las películas desde la API
 async function readAllMovies() {
     try {
+        // Se realiza una solicitud a la URL de la API para obtener información de películas.
         const response = await fetch("http://localhost:3000/movies");
 
         if (!response.ok) {
@@ -17,18 +18,21 @@ async function readAllMovies() {
         console.error(error);
     }
 }
-
+// Función para cargar información de una película específica desde la API
 async function readOneMovie() {
     try {
+        // Se define un ID de película específico (en este caso, "dragonhiddenworld").
         let item_id = "dragonhiddenworld";
         //let item_id = "guardians3";
         //let item_id = "spiderverse";
+        // Se realiza una solicitud a la URL de la API con el ID de la película.
         const response = await fetch("http://localhost:3000/movies/" + item_id);
 
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
-
+        // Se obtienen elementos HTML por su ID para actualizar el contenido de la página.
+        // Los datos de la película se asignan a estos elementos para mostrarlos en la página.
         const movie = await response.json();
         let moviePortrait = document.getElementById('movie-portrait');
         let movieTitle = document.getElementById('movie-title');

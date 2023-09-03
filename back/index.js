@@ -37,7 +37,7 @@ async function getMovies(db) {
     return moviesList;
 }
 
-//READ ALL MOVIES
+//Permite leer todas las peliculas que estan almacenadas en firebase
 expressApp.get('/movies', async (req, res) => {
     try {
         const movies = await getMovies(db);
@@ -48,7 +48,7 @@ expressApp.get('/movies', async (req, res) => {
     }
 });
 
-//READ ONE MOVIE
+//Permite buscar una pelicula dentro de la coleccion mediante su ID
 expressApp.get("/movies/:item_id", (req, res) => {
     (async () => {
         try {
@@ -81,7 +81,7 @@ expressApp.get("/movies/:item_id", (req, res) => {
     })();
 });
 
-//CREATE ONE MOVIE
+//Permite crear una nueva pelicula dentro de la coleccion movies
 expressApp.post("/movies/create", (req, res) => {
     (async () => {
         try {
@@ -94,7 +94,7 @@ expressApp.post("/movies/create", (req, res) => {
     })();
 });
 
-//UPDATE MOVIE
+//Permite editar la informacion de una pelicula
 expressApp.put('/movies/update/:item_id', (req, res) => {
     (async () => {
         try {
@@ -125,7 +125,7 @@ expressApp.put('/movies/update/:item_id', (req, res) => {
         }
     })();
 });
-
+//Permite eliminar una pelicula de la coleccion
 expressApp.delete("/movies/delete/:item_id", (req, res) => {
     (async () => {
         try {
