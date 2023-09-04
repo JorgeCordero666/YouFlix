@@ -1,10 +1,7 @@
-import { initializeApp } from 'firebase/app';
+const { initializeApp } = require('firebase/app');
+const { getFirestore, collection, getDocs, query, where, addDoc, deleteDoc, doc, updateDoc } = require('firebase/firestore/lite');
 
-import { getFirestore, collection, getDocs, query, where, addDoc, deleteDoc, doc, updateDoc } from 'firebase/firestore/lite';
 
-import express from 'express';
-
-import cors from 'cors';
 const firebaseConfig = {
     apiKey: "AIzaSyCvi-uF1tbyDIjKIZic7jwISlnmzQJ4pzY",
     authDomain: "youflix-6f8e4.firebaseapp.com",
@@ -17,11 +14,11 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 
 const db = getFirestore(firebaseApp);
-//const express = require('express')
+const express = require('express')
 const expressApp = express()
 const port = 3007
 
-//var cors = require('cors')
+var cors = require('cors')
 expressApp.use(cors())
 expressApp.use(express.json());
 

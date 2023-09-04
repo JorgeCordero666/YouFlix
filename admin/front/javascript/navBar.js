@@ -52,5 +52,7 @@ function cambiarImagen(){
   let displayImage = document.getElementById('favorite')
   if(displayImage.src.match('../img/favorite.png')){
     displayImage.src ='../img/favorite1.png'
-  } 
+  } else{
+    displayImage.src = '../img/favorite.png'
+  }
 }

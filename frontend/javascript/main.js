@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
       if (posterImages.length > 0) {
         for (const imageData of posterImages) {
-          const slideElement = document.createElement('a');
+          const slideElement = document.createElement('div');
           slideElement.className = 'carousel carousel-item';
           slideElement.dataset.movieId = imageData.id; // Almacena la ID de la película como un atributo de datos
           slideElement.innerHTML = `<img src="${imageData.imageUrl}" alt="Movie Poster">`;
@@ -158,7 +158,7 @@ slideElement.addEventListener('click', async () => {
 
     movieDetails.querySelector('p:nth-child(2)').textContent = `Release Date: ${movieData.release_date}`;
     movieDetails.querySelector('p:nth-child(3)').textContent = `Genres: ${genreIds}`;
-    movieDetails.querySelector('p:nth-child(4)').textContent = `Duration: ${await getRuntime(movieId)}`;
+    movieDetails.querySelector('p:nth-child(4)').textContent = `Duration: ${await getRuntime(movieId)} minutes`;
     movieDetails.querySelector('p:nth-child(5)').textContent = `Vote Average: ${movieData.vote_average}`;
     movieDetails.querySelector('p:nth-child(6)').textContent = `Vote Count: ${movieData.vote_count}`;
 
