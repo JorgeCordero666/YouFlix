@@ -42,7 +42,7 @@ function crearTarjetas(movies) {
         divMovieTitle.className = "movieTitle";
 
         const enlace = document.createElement("a");
-        enlace.href = `../../../frontend/movie.html`;
+        enlace.href = `../../../frontend/movie.html?id=${movie.id}`;
 
         const h3MovieTitle = document.createElement("h3");
         h3MovieTitle.className = "txt1";

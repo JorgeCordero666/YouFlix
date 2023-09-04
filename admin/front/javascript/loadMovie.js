@@ -20,7 +20,15 @@ async function readAllMovies() {
 
 async function readOneMovie() {
     try {
-        let item_id = "459003";
+
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+
+        if (id==null){
+            throw new Error(`NO Movie Found: ${response.status}`);
+        }
+
+        let item_id = id;
         //let item_id = "guardians3";
         //let item_id = "spiderverse";
         const response = await fetch("http://localhost:3007/movies/" + item_id);
