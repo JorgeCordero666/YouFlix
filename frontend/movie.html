@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie</title>
     <title>YouFlix</title>
-    <link rel="icon" href="../../../frontend/assets/images/logo_YouFlix.png" type="image/png">
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../../../frontend/node_modules/materialize-css/dist/css/materialize.css">
+    <link rel="icon" href="assets/images/logo_YouFlix.png" type="image/png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../admin/front/css/styles.css">
+    <link rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.css">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
@@ -16,48 +16,81 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 
-<header>
-    <body>
-        <div class="nav">
-            
-            <div class="icon-d" onclick="desplegarMenu()">
-                <img src="../img/home.svg" alt="home" class="icon">
-            </div>
 
-            <div class="logo">
-              <a href="../html/paginaPrincipal.html">
-                <img src="../img/logoH.png" alt="YOUFLIX_LOGO" class="logo" />
-              </a>
+<body>
+    <div id="header-buttons" class="text-right py-4">
+        <button id="signUp" class="btn">
+            <img src="assets/images/Sing_up.png" alt="Logo YouFlix">
+        </button>
+        <button id="signIn" class="btn">
+            <img src="assets/images/Sign_in.png" alt="Logo YouFlix">
+        </button>
+    </div>
+    <div class="container text-white py-2">
+        <div class="row text-center">
+           <div class="col-2 px-5 py-3">
+                <button class="btn rounded-circle" id="circular-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="55" height="55" viewBox="0 0 55 55" fill="none">
+                        <circle cx="27.5" cy="27.5" r="26" stroke="#D9D9D9" stroke-width="3"/>
+                        <path d="M14 35V23.3756C14 21.9581 14.6017 20.6072 15.6554 19.659L24.1554 12.0098C26.0568 10.2987 28.9432 10.2987 30.8446 12.0098L39.3446 19.659C40.3983 20.6072 41 21.9581 41 23.3756V35C41 37.7614 38.7614 40 36 40H19C16.2386 40 14 37.7614 14 35Z" stroke="#D9D9D9" stroke-width="3"/>
+                        <rect x="21.5" y="24.5" width="12" height="9" rx="1.5" stroke="#D9D9D9" stroke-width="3"/>
+                    </svg>
+                </button>
             </div>
-            <div class="btns">
-                <a href="../html/signup.html">
-                    <button class="btn-pr-sec">Sign up</button>
-                </a>
-    
-                <a href="../html/login.html">
-                    <button class="btn-pr">Sign in</button>
-                </a>
+            <div class="col-8">
+                <img src="assets/images/logo_YouFlix.png" alt="Logo YouFlix">
             </div>
-          </div>
-    
-        <img src="../img/lines.png" alt="" class="lines">
-</header>
+        </div>
+    </div>
+        <div>
+            <hr class="bg-white" style="width: 100%;">
+        </div>
 
-
+        <nav id="navbar">
+            <div class="container-fluid text-white py-2">
+                <div class="row align-items-center">
+                    <div class="col-2 px-5 py-3">
+                        <button class="button rounded-circle" id="button-nav" style="background: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="55" height="55" viewBox="0 0 55 55" fill="none">
+                                <circle cx="27.5" cy="27.5" r="26" stroke="#D9D9D9" stroke-width="3"/>
+                                <path d="M14 35V23.3756C14 21.9581 14.6017 20.6072 15.6554 19.659L24.1554 12.0098C26.0568 10.2987 28.9432 10.2987 30.8446 12.0098L39.3446 19.659C40.3983 20.6072 41 21.9581 41 23.3756V35C41 37.7614 38.7614 40 36 40H19C16.2386 40 14 37.7614 14 35Z" stroke="#D9D9D9" stroke-width="3"/>
+                                <rect x="21.5" y="24.5" width="12" height="9" rx="1.5" stroke="#D9D9D9" stroke-width="3"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="col-8 text-center">
+                        <h1>Menú</h1>
+                    </div>
+                    <hr class="bg-white" style="width: 80%;">
+                </div>
+                <ul>
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Mi Catálogo</a></li>
+                    <li><a href="#">Buscar</a></li>
+                    <li><a href="#">Estrenos</a></li>
+                    <li><a href="#">Acción</a></li>
+                    <li><a href="#">Drama</a></li>
+                    <li><a href="#">Fantasía</a></li>
+                    <li><a href="#">Familia</a></li>
+                    <li><a href="#">Romance</a></li>
+                    <li><a href="#">Terror</a></li>
+                </ul>
+            </div>
+        </nav>
 
 
     <div class="grid-container">
         <div class="grilla4x4">
             <div class="elem">
-                <img src="" alt="" class="moviePortada" id="movie-portrait">
+                <img src="" alt="Guardianes de la Galaxia" class="moviePortada" id="movie-portrait">
             </div>
             <div class="elem">
                 <div class="card-float">
                     <div class="card-bg"></div>
                     <div class="card-body-left">
                         <div class="card-icon">
-                            <a href="../html/paginaPrincipal.html">
-                            <img src="../img/back.svg" alt="" class="icon">
+                            <a href="../frontend/index.html">
+                            <img src="../admin/front/img/back.svg" alt="" class="icon">
                             </a>
                         </div>
                         <div class="movieInfo">
@@ -69,7 +102,7 @@
                         </div>
 
                         <span class="txt3">Reviews</span>
-                        
+
                         <h2></h2>
                         <span class="barField"> 
                             <div class="txt3"> 5 </div>
@@ -116,7 +149,7 @@
                 <span class="txt4" > <h3 class="txt3">Fecha de Estreno:</h3> <span id="movie-date"></span></span>
                 <h3 class="txt3">Rating en IMBD</h3>
                 <div class="rating">
-                    <img src="../img/🦆 icon _star 1_.svg" alt="star"> 
+                    <img src="../admin/front/img/🦆 icon _star 1_.svg" alt="star"> 
                     <h4 class="txt5"  id="movie-rate">/10</h4>
                 </div>
             </div>
@@ -125,14 +158,14 @@
                     <div class="card-bg-3"></div>
                     <div class="card-body-left">
                         <div class="card-icon">
-                            <img src="../img/favorite.png" id="favorite" onclick="cambiarImagen()"/>
+                            <img src="../frontend/assets/images/favorite.png" id="favorite" onclick="cambiarImagen()"/>
                         </div>
                         <div class="card-lines-bm">
                             <span class="txt3">¿Quieres agregar un comentario?<strong><a href="login.html">Inicia sesión</a></strong>.</span>
                         </div>
                         <div class="fotcomnt-an">
                             <div class="info">
-                                <img src="../img/🦆 icon _profile circle_.svg" alt="">
+                                <img src="../admin/front/img/🦆 icon _profile circle_.svg" alt="">
                                 <div class="card-lines-tf-2">
                                     <input type="text" class="input" placeholder="Ingresa tu comentario" />
                                 </div>
@@ -142,7 +175,7 @@
                                 <button class="btn-mn">Agregar Comentario</button>
                                 <button class="btn-mn">Cancelar</button>
                             </div>
-    
+
                         </div>
                         <!-- <div class="fotcomnt">
                             <img src="" alt="" id="movie-cmntPhoto">
@@ -158,7 +191,7 @@
                         <div class="load">
                             <h4 class="txt5">Cargar más comentarios...</h4>
                         </div> -->
-                    
+
                     </div>
                 </div>
             </div>
@@ -168,20 +201,21 @@
     <footer>
         <span>© 2023 YouFlix. Todos los derechos reservados.</span>
         <span> Desarrollado por EPN</span>
-    </footer>
+      </footer>
 
+
+
+
+    <!--Materialize.js-->
+    <script src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
+    <!-- Boostrap -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <!-- API-->
+    
+    <script src="javascript/main.js"></script>
+    <script src="../admin/front/javascript/loadMovie.js"></script>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-<script src="../javascript/loadMovie.js"></script>
-
-<!--Materialize.js-->
-<script src="../../../frontend/node_modules/materialize-css/dist/js/materialize.min.js"></script>
-<!-- Boostrap -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-<!-- API-->
-
-<script src="javascript/main.js"></script>
 </html>

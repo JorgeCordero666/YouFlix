@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function readAllMovies() {
     try {
-        const response = await fetch("http://localhost:3000/movies");
+        const response = await fetch("http://localhost:3007/movies");
 
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -20,10 +20,10 @@ async function readAllMovies() {
 
 async function readOneMovie() {
     try {
-        let item_id = "dragonhiddenworld";
+        let item_id = "459003";
         //let item_id = "guardians3";
         //let item_id = "spiderverse";
-        const response = await fetch("http://localhost:3000/movies/" + item_id);
+        const response = await fetch("http://localhost:3007/movies/" + item_id);
 
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -103,3 +103,12 @@ async function readOneMovie() {
         console.error(error);
     }
 }
+
+function cambiarImagen(){
+    let displayImage = document.getElementById('favorite')
+    if(displayImage.src.match('../frontend/assets/images/favorite.png')){
+      displayImage.src ='../frontend/assets/images/favorite1.png'
+    } else{
+      displayImage.src = '../frontend/assets/images/favorite.png'
+    }
+  }
