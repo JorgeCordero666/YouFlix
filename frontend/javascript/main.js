@@ -129,8 +129,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (posterImages.length > 0) {
         for (const imageData of posterImages) {
           const slideElement = document.createElement('a');
+          // const enlace = document.createElement("a");
+          // enlace.href = `../../../frontend/movie.html?id=${movie.id}`;
           slideElement.className = 'carousel carousel-item';
           slideElement.dataset.movieId = imageData.id; // Almacena la ID de la película como un atributo de datos
+          slideElement.href = `../../../frontend/movie.html?id=${slideElement.dataset.movieId}`;
           slideElement.innerHTML = `<img src="${imageData.imageUrl}" alt="Movie Poster">`;
           carouselElement.appendChild(slideElement);
           
