@@ -14,7 +14,6 @@ async function readAllMovies() {
         }
 
         const movies = await response.json();
-        console.log(movies);
         crearTarjetas(movies);
     } catch (error) {
         console.error(error);
@@ -93,6 +92,7 @@ function crearTarjetas(movies) {
                             console.error("Error al eliminar la película.");
                         }
                         deleteConfirmationModal.hide();
+                        location.reload();
                     })
                     .catch((error) => {
                         console.error("Error al eliminar la película:", error);
@@ -170,8 +170,8 @@ function abrirVentanaModal(movie) {
           <ul>
             ${movie.comentarios.map((comentario, index) => `
               <li>
-                <strong>Usuario:</strong> ${comentario.usuario}<br>
-                <strong>Comentario:</strong> ${comentario.comentario}
+                <strong>Usuario:</strong> ${comentario.user}<br>
+                <strong>Comentario:</strong> ${comentario.comment}
                 <button type="button" class="btn btn-danger btn-sm" id="deleteComment${index}">Borrar</button>
               </li>
             `).join("")}
@@ -245,6 +245,7 @@ function abrirVentanaModal(movie) {
             .then((data) => {
                 console.log("Información actualizada con éxito:", data);
                 bootstrapModal.hide();
+                location.reload();
             })
             .catch((error) => {
                 console.error("Error al actualizar la información:", error);
@@ -403,6 +404,7 @@ addMovieButton.addEventListener("click", () => {
                     console.error("Error al crear la película.");
                 }
                 bootstrapModal.hide();
+                location.reload();
             })
             .catch((error) => {
                 console.error("Error al crear la película:", error);

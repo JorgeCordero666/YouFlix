@@ -239,10 +239,10 @@ e fondo al fondo del card */
 }
 
 footer {
-  background-color: #070707;
+  background-color: #000000;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; 
   flex-direction: column;
   height: 96px;
   color: #ffffff;
