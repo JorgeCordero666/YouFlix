@@ -132,6 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
           slideElement.className = 'carousel carousel-item';
           slideElement.dataset.movieId = imageData.id; // Almacena la ID de la película como un atributo de datos
           slideElement.href = `../../../frontend/movie.html?id=${slideElement.dataset.movieId}`;
+          slideElement.href = `../../../frontend/movie.html?id=${slideElement.dataset.movieId}`;
           slideElement.innerHTML = `<img src="${imageData.imageUrl}" alt="Movie Poster">`;
           carouselElement.appendChild(slideElement);
           
