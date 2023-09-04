@@ -24,6 +24,7 @@ async function readOneMovie() {
         //let item_id = "guardians3";
         //let item_id = "spiderverse";
         const response = await fetch("http://localhost:3000/movies/" + item_id);
+>>>>>>>>> Temporary merge branch 2
 
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
