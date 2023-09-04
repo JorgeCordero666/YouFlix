@@ -15,8 +15,16 @@
 
 
 <body>
-    <div class="container-fluid text-white py-2">
-        <div class="row">
+    <div id="header-buttons" class="text-right py-4">
+        <button id="signUp" class="btn">
+            <img src="assets/images/Sing_up.png" alt="Logo YouFlix">
+        </button>
+        <button id="signIn" class="btn">
+            <img src="assets/images/Sign_in.png" alt="Logo YouFlix">
+        </button>
+    </div>
+    <div class="container text-white py-2">
+        <div class="row text-center">
            <div class="col-2 px-5 py-3">
                 <button class="btn rounded-circle" id="circular-button">
                     <svg xmlns="http://www.w3.org/2000/svg" width="55" height="55" viewBox="0 0 55 55" fill="none">
@@ -25,48 +33,81 @@
                         <rect x="21.5" y="24.5" width="12" height="9" rx="1.5" stroke="#D9D9D9" stroke-width="3"/>
                     </svg>
                 </button>
-           </div>
-            <div class="col-8 text-center">
-                <img src="assets/images/logo_YouFlix.png" alt="Logo YouFlix" class="img-fluid">
+            </div>
+            <div class="col-8">
+                <img src="assets/images/logo_YouFlix.png" alt="Logo YouFlix">
             </div>
         </div>
+    </div>
         <div>
             <hr class="bg-white" style="width: 100%;">
         </div>
 
-        <!--Carusel de las peliculas-->
-        <div class="container" style="margin-bottom: 100px; margin-top: 100px;">
-            <div class="carousel">
-            <!--Portadas-->
-            </div>
+        <div class="container">
+            <input id="Buscar" class="barraBuscar" placeholder="Buscar película...">
+            <button class="btn-buscar p-2 px-5" type="button">Buscar</button>
         </div>
 
-<!-- La tarjeta para mostrar los detalles de la película -->
-        <div id="movie-details" class="card mx-auto" >
-            <div class="card-body">
-                <h1 class="card-title display-4 font-weight-bold">Movie Title</h1>
-                <p class="card-text"><strong>Release Date:</strong> 2023-09-01</p>
-                <p class="card-text"><strong>Genres:</strong> Action, Adventure</p>
-                <p class="card-text"><strong>Duration:</strong> 120 minutes</p>
-                <p class="card-text"><strong>Vote Average:</strong> 8.5</p>
-                <p class="card-text"><strong>Vote Count:</strong> 500</p>
+        <nav id="navbar">
+            <div class="container-fluid text-white py-2">
+                <div class="row align-items-center">
+                    <div class="col-2 px-5 py-3">
+                        <button class="button rounded-circle" id="button-nav" style="background: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="55" height="55" viewBox="0 0 55 55" fill="none">
+                                <circle cx="27.5" cy="27.5" r="26" stroke="#D9D9D9" stroke-width="3"/>
+                                <path d="M14 35V23.3756C14 21.9581 14.6017 20.6072 15.6554 19.659L24.1554 12.0098C26.0568 10.2987 28.9432 10.2987 30.8446 12.0098L39.3446 19.659C40.3983 20.6072 41 21.9581 41 23.3756V35C41 37.7614 38.7614 40 36 40H19C16.2386 40 14 37.7614 14 35Z" stroke="#D9D9D9" stroke-width="3"/>
+                                <rect x="21.5" y="24.5" width="12" height="9" rx="1.5" stroke="#D9D9D9" stroke-width="3"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="col-8 text-center">
+                        <h1>Menú</h1>
+                    </div>
+                    <hr class="bg-white" style="width: 80%;">
+                </div>
+                <ul>
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Mi Catálogo</a></li>
+                    <li><a href="#">Buscar</a></li>
+                    <li><a href="#">Estrenos</a></li>
+                    <li><a href="#">Acción</a></li>
+                    <li><a href="#">Drama</a></li>
+                    <li><a href="#">Fantasía</a></li>
+                    <li><a href="#">Familia</a></li>
+                    <li><a href="#">Romance</a></li>
+                    <li><a href="#">Terror</a></li>
+                </ul>
             </div>
+        </nav>
+        
+
+    </div>
+
+    <!--Carusel de las peliculas-->
+    <div class="container" style="margin-bottom: 100px; margin-top: 100px;">
+        <div class="carousel">
+        <!--Portadas-->
         </div>
+    </div>
+      
 
-<div id="movie-gallery" class="gallery"></div>
-
-
-
-
-
-
-  
-          
-       
-    <!-- <div id="movies-list">
-         Aquí se mostrarán las películas 
-    </div>-->
+    <!-- La tarjeta para mostrar los detalles de la película -->
+    <div id="movie-details" class="card mx-auto text-white">
+        <div class="card-body">
+            <h1 class="card-title" style="font-weight: normal;"><strong>Megalodón 2: La fosa</strong></h1>
+            <p> Release Date: 2023-08-02</p>
+            <p>Genres: Acción, Ciencia ficción, Terror</p>
+            <p>Duration: 116 minutes</p>
+            <p>Vote Average: 7.081</p>
+            <p>Vote Count: 1279</p>
+        </div>
+    </div>
     
+
+    <!-- <div id="movies-list">
+     Aquí se mostrarán las películas 
+    </div>-->
+
     <!--Materialize.js-->
     <script src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
     <!-- Boostrap -->
