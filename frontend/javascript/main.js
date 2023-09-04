@@ -128,13 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
       if (posterImages.length > 0) {
         for (const imageData of posterImages) {
-<<<<<<< HEAD
           const slideElement = document.createElement('div');
-=======
-          const slideElement = document.createElement('a');
-          // const enlace = document.createElement("a");
-          // enlace.href = `../../../frontend/movie.html?id=${movie.id}`;
->>>>>>> 7482ab8 (href FIX)
           slideElement.className = 'carousel carousel-item';
           slideElement.dataset.movieId = imageData.id; // Almacena la ID de la película como un atributo de datos
           slideElement.href = `../../../frontend/movie.html?id=${slideElement.dataset.movieId}`;
