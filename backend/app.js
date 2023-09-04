@@ -32,7 +32,7 @@ app.get('/genres', async (req, res) => {
 
 app.get('/movies', async (req, res) => {
   try {
-    const url = 'https://api.themoviedb.org/3/movie/now_playing?language=es-ES&page=1';
+    const url = 'https://api.themoviedb.org/3/movie/now_playing?language=es-ES&page=2';
     const options = {
       method: 'GET',
       headers: {
