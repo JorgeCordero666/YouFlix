@@ -19,9 +19,26 @@ async function alimentador() {
 
             const movieInd = await fetch("http://localhost:3000/movies/" + m.id)
             const movieIndData = await movieInd.json();
-            const movieCountry = movieIndData.production_countries[0] ? movieIndData.production_countries [0].name : 'N/A';
+            let movieCountry = ""
+            try {
+                movieCountry = movieIndData.production_countries[0] ? movieIndData.production_countries [0].name : 'N/A';
+            }catch(e){
+                console.log(e)
+                movieCountry ='N/A';
+            }
+            
             const minutes = movieIndData.runtime;
-            const movieTime =   convertidorMinutos(minutes);
+            const movieTime = convertidorMinutos(minutes);
+            let five = 32;
+            let four = 25;
+            let three = 18;
+            let two = 13;
+            let one = 6;
+
+            const cmmnts = await fetch("https://dummyjson.com/comments");
+            const cmntData = await cmmnts.json();
+            const img_url = "https://firebasestorage.googleapis.com/v0/b/youflix-f4695.appspot.com/o/portadas%2FEllipse%2011.png?alt=media&token=2e4d3fb6-5684-4de6-a512-1d911e12ce93";
+            const cmnts = [cmntData.comments[0].user.username,cmntData.comments[0].body,img_url]
             const newMovie = {
                 movie: {
                     title: m.title,
@@ -31,9 +48,13 @@ async function alimentador() {
                     sinopsis: m.overview,
                     genres: genres,
                     country: movieCountry,
-                    rating: m.vote_average.toFixed(1),
-                    reviews: [m.vote_count, 0, 0, 0, 0],
-                    comentarios: [],
+                    rating: m.vote_average,
+                    reviews: [five, four, three, two, one],
+                    comentarios: [{
+                        "user" : cmnts[0],
+                        "comment": cmnts[1],
+                        "img_url": cmnts[2]
+                    }],
                     img_url: `https://image.tmdb.org/t/p/w500${m.poster_path}`,
                     id: "" + m.id
                 },

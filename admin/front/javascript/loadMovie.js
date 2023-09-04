@@ -20,10 +20,10 @@ async function readAllMovies() {
 
 async function readOneMovie() {
     try {
-        let item_id = "dragonhiddenworld";
+        let item_id = "459003";
         //let item_id = "guardians3";
         //let item_id = "spiderverse";
-        const response = await fetch("http://localhost:3000/movies/" + item_id);
+        const response = await fetch("http://localhost:3007/movies/" + item_id);
 
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -48,12 +48,7 @@ async function readOneMovie() {
         moviePortrait.src = movie[0].movie.img_url;
         movieTitle.textContent = movie[0].movie.title;
         movieAdditionalInfo.textContent = movie[0].movie.year + " - " + movie[0].movie.directorName + " - " + movie[0].movie.time
-        let promMovieUserQualif = 0;
-        movie[0].movie.reviews.forEach((x, i) => {
-            promMovieUserQualif += x * (5 - i)
-        });
-        promMovieUserQualif /= 100;
-        movieUserQualification.textContent = parseFloat(promMovieUserQualif.toFixed(2));
+        movieUserQualification.textContent =  movie[0].movie.rating;
         movieReviewsLvl5.style.width = movie[0].movie.reviews[0] + "%";
         movieReviewsLvl4.style.width = movie[0].movie.reviews[1] + "%";
         movieReviewsLvl3.style.width = movie[0].movie.reviews[2] + "%";
@@ -74,7 +69,7 @@ async function readOneMovie() {
             divElement.classList.add("fotcomnt");
 
             const imgElement = document.createElement("img");
-            imgElement.src = comentario.img;
+            imgElement.src = comentario.img_url;
             imgElement.alt = "";
 
             const cardLinesDiv = document.createElement("div");
@@ -82,12 +77,12 @@ async function readOneMovie() {
 
             const nameSpan = document.createElement("span");
             nameSpan.classList.add("name");
-            nameSpan.textContent = comentario.usuario;
+            nameSpan.textContent = comentario.user;
 
             const commentDiv = document.createElement("div");
             commentDiv.classList.add("comment");
             const commentSpan = document.createElement("span");
-            commentSpan.textContent = comentario.comentario;
+            commentSpan.textContent = comentario.comment;
             commentDiv.appendChild(commentSpan);
 
             cardLinesDiv.appendChild(nameSpan);
