@@ -96,9 +96,9 @@ for (const movie of moviesData) {
 // Define getRuntime en el ámbito global
 async function getRuntime(movieId) {
   try {
-    const response = await fetch(`http://localhost:3000/movies/${movieId}`);
+    const response = await fetch(`http://localhost:3007/movies/${movieId}`);
     const movie = await response.json();
-    return movie.runtime || 'N/A';
+    return movie[0].movie.time || 'N/A';
   } catch (error) {
     console.error('Error al obtener el runtime:', error);
     return 'N/A';
@@ -110,11 +110,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Función para obtener las imágenes de portada de las películas
   async function getPosterImages() {
     try {
-      const response = await fetch('http://localhost:3000/movies');
+      const response = await fetch('http://localhost:3007/movies');
       const data = await response.json();
       return data.map(movie => ({
         id: movie.id,
-        imageUrl: `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+        imageUrl: movie.img_url
       }));
     } catch (error) {
       console.error('Error al obtener las imágenes de portada:', error);
