@@ -106,7 +106,6 @@ async function getRuntime(movieId) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-
   // Función para obtener las imágenes de portada de las películas
   async function getPosterImages() {
     try {
@@ -134,6 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
           slideElement.dataset.movieId = imageData.id; // Almacena la ID de la película como un atributo de datos
           slideElement.innerHTML = `<img src="${imageData.imageUrl}" alt="Movie Poster">`;
           carouselElement.appendChild(slideElement);
+          
   
   // Dentro del evento de clic en el elemento de la película
 slideElement.addEventListener('click', async () => {
@@ -150,10 +150,15 @@ slideElement.addEventListener('click', async () => {
 
     // Actualizar la tarjeta de detalles con los datos de la película y los géneros
     const movieDetails = document.getElementById('movie-details');
-    movieDetails.querySelector('.card-title').textContent = movieData.title;
+    const cardTitle = movieDetails.querySelector('.card-title');
+    cardTitle.textContent = movieData.title;
+
+    // Poner en negrita el título
+    cardTitle.style.fontWeight = 'bold';
+
     movieDetails.querySelector('p:nth-child(2)').textContent = `Release Date: ${movieData.release_date}`;
     movieDetails.querySelector('p:nth-child(3)').textContent = `Genres: ${genreIds}`;
-    movieDetails.querySelector('p:nth-child(4)').textContent = `Duration: ${await getRuntime(movieId)}`;
+    movieDetails.querySelector('p:nth-child(4)').textContent = `Duration: ${await getRuntime(movieId)} minutes`;
     movieDetails.querySelector('p:nth-child(5)').textContent = `Vote Average: ${movieData.vote_average}`;
     movieDetails.querySelector('p:nth-child(6)').textContent = `Vote Count: ${movieData.vote_count}`;
 
@@ -186,102 +191,37 @@ slideElement.addEventListener('click', async () => {
   }
   // Llama a la función para inicializar el carrusel
   initializeCarousel();
-
-  async function initializeGallery() {
-  try {
-    const posterImages = await getPosterImages();
-    const galleryElement = document.getElementById('movie-gallery');
-
-    if (posterImages.length > 0) {
-      for (let i = 0; i < 9 && i < posterImages.length; i++) {
-        const imageData = posterImages[i];
-
-        const movieElement = document.createElement('div');
-        movieElement.className = 'gallery-movie';
-        movieElement.dataset.movieId = imageData.id; // Almacena la ID de la película como un atributo de datos
-        movieElement.innerHTML = `<img src="${imageData.imageUrl}" alt="Movie Poster">`;
-        galleryElement.appendChild(movieElement);
-
-        // Dentro del evento de clic en el elemento de la película
-        movieElement.addEventListener('click', async () => {
-          // Obtener la ID de la película desde el atributo de datos
-          const movieId = parseInt(movieElement.dataset.movieId, 10);
-
-          // Obtener los detalles de la película por su ID
-          try {
-            const response = await fetch(`http://localhost:3000/movies/${movieId}`);
-            const movieData = await response.json();
-
-            // Puedes realizar acciones adicionales aquí con los detalles de la película si es necesario.
-
-          } catch (error) {
-            console.error('Error al obtener los detalles de la película:', error);
-          }
-        });
-      }
-    } else {
-      console.error('No se encontraron imágenes de portada para mostrar en la galería.');
-    }
-  } catch (error) {
-    console.error('Error al inicializar la galería:', error);
-  }
-}
-
-// Llama a la función para inicializar la galería
-initializeGallery();
-
-async function initializeGallery() {
-  try {
-    const posterImages = await getPosterImages();
-    const galleryElement = document.getElementById('movie-gallery');
-
-    if (posterImages.length > 0) {
-      for (let row = 0; row < 3; row++) {
-        const rowElement = document.createElement('div');
-        rowElement.className = 'gallery-row';
-        galleryElement.appendChild(rowElement);
-
-        for (let col = 0; col < 3; col++) {
-          const index = row * 3 + col;
-          if (index < posterImages.length) {
-            const imageData = posterImages[index];
-
-            const movieElement = document.createElement('div');
-            movieElement.className = 'gallery-movie';
-            movieElement.dataset.movieId = imageData.id; // Almacena la ID de la película como un atributo de datos
-            movieElement.innerHTML = `<img src="${imageData.imageUrl}" alt="Movie Poster">`;
-            rowElement.appendChild(movieElement);
-
-            // Dentro del evento de clic en el elemento de la película
-            movieElement.addEventListener('click', async () => {
-              // Obtener la ID de la película desde el atributo de datos
-              const movieId = parseInt(movieElement.dataset.movieId, 10);
-
-              // Obtener los detalles de la película por su ID
-              try {
-                const response = await fetch(`http://localhost:3000/movies/${movieId}`);
-                const movieData = await response.json();
-
-                // Puedes realizar acciones adicionales aquí con los detalles de la película si es necesario.
-
-              } catch (error) {
-                console.error('Error al obtener los detalles de la película:', error);
-              }
-            });
-          }
-        }
-      }
-    } else {
-      console.error('No se encontraron imágenes de portada para mostrar en la galería.');
-    }
-  } catch (error) {
-    console.error('Error al inicializar la galería:', error);
-  }
-}
-
-// Llama a la función para inicializar la galería
-initializeGallery();
-
-
-  
 });
+
+
+const circularButton = document.getElementById('circular-button');
+const navbar = document.getElementById('navbar');
+
+// Función para mostrar/ocultar el menú de navegación
+circularButton.addEventListener('click', () => {
+    if (navbar.style.left === '0px') {
+        navbar.style.left = '-600px'; // Ocultar
+    } else {
+        navbar.style.left = '0px'; // Mostrar
+    }
+});
+
+const buttonNav = document.getElementById('button-nav');
+
+// Función para cerrar el menú de navegación
+function closeNavbar() {
+  navbar.style.left = '-600px'; // Ocultar el menú
+}
+
+// Agregar un evento de clic al botón "button-nav"
+buttonNav.addEventListener('click', closeNavbar);
+
+//cerrar nav menu al dar clic en otro lugar que no sea el navmenu
+/*document.addEventListener('click', (event) => {
+  const navbar = document.getElementById('navbar');
+  if (navbar.style.left === '0px' && event.target !== circularButton) {
+    closeNavbar();
+  }
+});*/
+
+
