@@ -461,6 +461,7 @@ footer {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  width: 800px;
 }
 .grilla4x4 .elem-2 .rating {
   display: flex;
@@ -477,3 +478,4 @@ footer {
   margin-right: 8px; /* Espacio entre el ícono y el título de la película */
 }
 /*# sourceMappingURL=styles.css.map */
+

@@ -72,9 +72,11 @@ async function readOneMovie() {
         movieRate.textContent = movie[0].movie.rating + "/10";
         movie[0].movie.comentarios.forEach(comentario => {
             const divElement = document.createElement("div");
+            divElement.style.marginLeft = "20px";
             divElement.classList.add("fotcomnt");
 
             const imgElement = document.createElement("img");
+            imgElement.style.marginTop = "20px";
             imgElement.src = comentario.img_url;
             imgElement.alt = "";
 
@@ -86,7 +88,9 @@ async function readOneMovie() {
             nameSpan.textContent = comentario.user;
 
             const commentDiv = document.createElement("div");
+            commentDiv.style.marginLeft = "25px";
             commentDiv.classList.add("comment");
+
             const commentSpan = document.createElement("span");
             commentSpan.textContent = comentario.comment;
             commentDiv.appendChild(commentSpan);

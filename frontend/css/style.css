@@ -219,3 +219,9 @@ footer {
     text-align: center;
     font-size: large;
   }
+
+  #msjerror {
+    display: block; /* Asegura que el elemento sea visible */
+    color: red; /* Cambia el color del texto del mensaje si es necesario */
+    margin-bottom: 10px;
+}

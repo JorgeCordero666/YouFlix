@@ -120,64 +120,70 @@ document.addEventListener('DOMContentLoaded', () => {
       return [];
     }
   }
+
+  // Función para actualizar la tarjeta de detalles con los datos de la película
+  async function updateMovieDetails(movieId) {
+    try {const response = await fetch(`http://localhost:3000/movies/${movieId}`);
+      
+      const movieData = await response.json();
+
+      // Obtener los nombres de los géneros de la película
+      const genreIds = movieData.genres.map(genre => genre.name).join(', ');
+
+      // Actualizar la tarjeta de detalles con los datos de la película y los géneros
+      const movieDetails = document.getElementById('movie-details');
+      const cardTitle = movieDetails.querySelector('.card-title');
+      cardTitle.textContent = movieData.title;
+
+      // Poner en negrita el título
+      cardTitle.style.fontWeight = 'bold';
+
+      movieDetails.querySelector('p:nth-child(2)').textContent = `Release Date: ${movieData.release_date}`;
+      movieDetails.querySelector('p:nth-child(3)').textContent = `Genres: ${genreIds}`;
+      movieDetails.querySelector('p:nth-child(4)').textContent = `Duration: ${await getRuntime(movieId)}`;
+      movieDetails.querySelector('p:nth-child(5)').textContent = `Vote Average: ${movieData.vote_average}`;
+      movieDetails.querySelector('p:nth-child(6)').textContent = `Vote Count: ${movieData.vote_count}`;
+
+      // Mostrar la tarjeta de detalles
+      movieDetails.style.display = 'block';
+    } catch (error) {
+      console.error('Error al obtener los detalles de la película:', error);
+    }
+  }
+
   // Función para inicializar el carrusel con las imágenes de portada
   async function initializeCarousel() {
     try {
       const posterImages = await getPosterImages();
       const carouselElement = document.querySelector('.carousel');
-  
+
       if (posterImages.length > 0) {
         for (const imageData of posterImages) {
           const slideElement = document.createElement('a');
-          // const enlace = document.createElement("a");
-          // enlace.href = `../../../frontend/movie.html?id=${movie.id}`;
           slideElement.className = 'carousel carousel-item';
           slideElement.dataset.movieId = imageData.id; // Almacena la ID de la película como un atributo de datos
           slideElement.href = `../../../frontend/movie.html?id=${slideElement.dataset.movieId}`;
           slideElement.innerHTML = `<img src="${imageData.imageUrl}" alt="Movie Poster">`;
           carouselElement.appendChild(slideElement);
-          
-  
-  // Dentro del evento de clic en el elemento de la película
-slideElement.addEventListener('click', async () => {
-  // Obtener la ID de la película desde el atributo de datos
-  const movieId = parseInt(slideElement.dataset.movieId, 10);
 
-  // Obtener los datos de la película por su ID
-  try {
-    const response = await fetch(`http://localhost:3000/movies/${movieId}`);
-    const movieData = await response.json();
-
-    // Obtener los nombres de los géneros de la película
-    const genreIds = movieData.genres.map(genre => genre.name).join(', ');
-
-    // Actualizar la tarjeta de detalles con los datos de la película y los géneros
-    const movieDetails = document.getElementById('movie-details');
-    const cardTitle = movieDetails.querySelector('.card-title');
-    cardTitle.textContent = movieData.title;
-
-    // Poner en negrita el título
-    cardTitle.style.fontWeight = 'bold';
-
-    movieDetails.querySelector('p:nth-child(2)').textContent = `Release Date: ${movieData.release_date}`;
-    movieDetails.querySelector('p:nth-child(3)').textContent = `Genres: ${genreIds}`;
-    movieDetails.querySelector('p:nth-child(4)').textContent = `Duration: ${await getRuntime(movieId)}`;
-    movieDetails.querySelector('p:nth-child(5)').textContent = `Vote Average: ${movieData.vote_average}`;
-    movieDetails.querySelector('p:nth-child(6)').textContent = `Vote Count: ${movieData.vote_count}`;
-
-    // Mostrar la tarjeta de detalles
-    movieDetails.style.display = 'block';
-  } catch (error) {
-    console.error('Error al obtener los detalles de la película:', error);
-  }
-});
+          // Dentro del evento de mouseenter en el elemento de la película
+          slideElement.addEventListener('mouseenter', () => {
+            const movieId = parseInt(slideElement.dataset.movieId, 10);
+            updateMovieDetails(movieId);
+          });
         }
-  
+
+        // Obtener el ID de la primera película
+        const firstMovieId = posterImages[0].id;
+
+        // Mostrar los detalles de la primera película al cargar la página
+        updateMovieDetails(firstMovieId);
+
         // Inicializa el carrusel con múltiples elementos visibles
         const carouselInstance = M.Carousel.init(carouselElement, {
           duration: 15
         });
-  
+
         // Esperar a que el carrusel esté listo antes de acceder a la propiedad 'center'
         carouselElement.addEventListener('ready', function () {
           const currentIndex = carouselInstance.center;
@@ -192,9 +198,11 @@ slideElement.addEventListener('click', async () => {
       console.error('Error al inicializar el carrusel:', error);
     }
   }
+
   // Llama a la función para inicializar el carrusel
   initializeCarousel();
 });
+
 
 
 const circularButton = document.getElementById('circular-button');
@@ -227,22 +235,33 @@ buttonNav.addEventListener('click', closeNavbar);
   }
 });*/
 
-// Agregar un evento clic al botón de búsqueda
-document.getElementById("buscarButton").addEventListener("click", function() {
-  // Obtener el valor del campo de búsqueda
-  var searchText = document.getElementById("Buscar").value;
-  
-  // Comprobar si el campo de búsqueda no está vacío
-  if (searchText.trim() !== "") {
-      // Construir la URL con la ID de la película
-      var movieId = encodeURIComponent(searchText);
-      var movieUrl = `../../../frontend/movie.html?id=${movieId}`;
-      
-      // Redirigir a la página de la película
-      window.location.href = movieUrl;
-  } else {
-      // Manejar el caso en que el campo de búsqueda está vacío
-      alert("Por favor, ingrese el nombre de la película a buscar.");
-  }
-});
 
+
+document.getElementById("buscarButton").addEventListener("click", function() {
+  var nombrePelicula = document.getElementById("Buscar").value;
+  var mensajeElement = document.getElementById("msjerror");
+
+  // Realiza una solicitud HTTP GET para obtener la lista de películas
+  fetch("http://localhost:3007/movies")
+      .then(response => response.json())
+      .then(data => {
+          // Recorre la lista de películas para buscar una coincidencia
+          for (var i = 0; i < data.length; i++) {
+              var pelicula = data[i];
+              if (pelicula.title.toLowerCase() === nombrePelicula.toLowerCase()) {
+                  // Obtén la ID de la película encontrada
+                  var peliculaId = pelicula.id;
+
+                  // Redirige a la página movie.html con la ID
+                  window.location.href = `../../../frontend/movie.html?id=${peliculaId}`;
+                  return; // Sale del bucle si se encuentra una coincidencia
+              }
+          }
+
+          // Si no se encuentra ninguna coincidencia, muestra un mensaje
+          mensajeElement.textContent = "No se encontró ninguna película con ese título.";
+      })
+      .catch(error => {
+          console.error("Error al obtener la lista de películas: " + error);
+      });
+});

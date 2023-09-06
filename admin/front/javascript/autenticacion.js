@@ -14,6 +14,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth();
+var mensajeElement = document.getElementById("msjerror");
 
 export class ManageAccount {
   register(email, password) {
@@ -26,7 +27,8 @@ export class ManageAccount {
       .catch((error) => {
         console.error(error.message);
             // Mostrar alerta de error de registro
-            alert("Error al registrar: " + error.message);
+            //alert("Error al registrar: " + error.message);
+            mensajeElement.textContent = "Error al registrar cuenta";
       });
   }
 
@@ -35,12 +37,13 @@ export class ManageAccount {
       .then((_) => {
         window.location.href = "admin.html";
         // Mostrar alerta de inicio de sesión exitoso
-        alert("Has iniciado sesión correctamente. Serás redirigido a la página principal.");
+        //alert("Has iniciado sesión correctamente. Serás redirigido a la página principal.");
       })
       .catch((error) => {
         console.error(error.message);
                 // Mostrar alerta de error de inicio de sesión
-                alert("Error al iniciar sesión: " + error.message);
+                //alert("Error al iniciar sesión: " + error.message);
+                mensajeElement.textContent = "Este usuario no estra registrado";
       });
   }
 
