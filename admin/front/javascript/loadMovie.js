@@ -113,3 +113,4 @@ function cambiarImagen(){
       displayImage.src = '../frontend/assets/images/favorite.png'
     }
   }
+

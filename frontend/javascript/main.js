@@ -227,4 +227,22 @@ buttonNav.addEventListener('click', closeNavbar);
   }
 });*/
 
+// Agregar un evento clic al botón de búsqueda
+document.getElementById("buscarButton").addEventListener("click", function() {
+  // Obtener el valor del campo de búsqueda
+  var searchText = document.getElementById("Buscar").value;
+  
+  // Comprobar si el campo de búsqueda no está vacío
+  if (searchText.trim() !== "") {
+      // Construir la URL con la ID de la película
+      var movieId = encodeURIComponent(searchText);
+      var movieUrl = `../../../frontend/movie.html?id=${movieId}`;
+      
+      // Redirigir a la página de la película
+      window.location.href = movieUrl;
+  } else {
+      // Manejar el caso en que el campo de búsqueda está vacío
+      alert("Por favor, ingrese el nombre de la película a buscar.");
+  }
+});
 

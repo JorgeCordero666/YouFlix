@@ -15,7 +15,7 @@
 
 
 <body>
-    <div id="header-buttons" class="text-right py-4">
+    <div id="header-buttons" class="text-right py-4 px-4 width:100px">
         <button id="signUp" class="btn">
             <img src="assets/images/Sing_up.png" alt="Logo YouFlix">
         </button>
@@ -35,7 +35,9 @@
                 </button>
             </div>
             <div class="col-8">
-                <img src="assets/images/logo_YouFlix.png" alt="Logo YouFlix">
+                <a href="index.html">
+                    <img style="position: relative;" src="assets/images/logo_YouFlix.png" alt="Logo YouFlix">
+                </a>
             </div>
         </div>
     </div>
@@ -45,7 +47,7 @@
 
         <div class="container">
             <input id="Buscar" class="barraBuscar" placeholder="Buscar película...">
-            <button class="btn-buscar p-2 px-5" type="button">Buscar</button>
+            <button class="btn-buscar p-2 px-5" type="button" id="buscarButton">Buscar</button>
         </div>
 
         <nav id="navbar">
@@ -66,8 +68,8 @@
                     <hr class="bg-white" style="width: 80%;">
                 </div>
                 <ul>
-                    <li><a href="#">Inicio</a></li>
-                    <li><a href="#">Mi Catálogo</a></li>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="../admin/front/html/admin.html">Catálogo</a></li>
                     <li><a href="#">Buscar</a></li>
                     <li><a href="#">Estrenos</a></li>
                     <li><a href="#">Acción</a></li>
@@ -79,7 +81,6 @@
                 </ul>
             </div>
         </nav>
-        
 
     </div>
 
@@ -102,8 +103,11 @@
             <p>Vote Count: 1279</p>
         </div>
     </div>
-    
-
+    <footer>
+        <hr class="bg-white" style="width: 100%;">
+        <span >© 2023 YouFlix. Todos los derechos reservados.<br></span>
+        <span> Desarrollado por EPN</span>
+    </footer>
     <!-- <div id="movies-list">
      Aquí se mostrarán las películas 
     </div>-->
@@ -116,5 +120,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- API-->
     <script src="javascript/main.js"></script>
+    <!--Logica Botones-->
+    <script src="javascript/logicButtons.js"></script>
 </body>
 </html>

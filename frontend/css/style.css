@@ -165,8 +165,15 @@ h1 {
 /* Estilos para botones singin-up */
 /*--------------------------------*/
 
-  #header-buttons {
-    position: absolute;
+  #header-signUp {
+    position: relative;
+    top: 10px;
+    right: 10px;
+}
+
+
+#header-signIn {
+    position: relative;
     top: 10px;
     right: 10px;
 }
@@ -201,3 +208,14 @@ h1 {
 .btn-buscar:hover {
     transform: scale(1.1);
 }
+
+footer {
+    background-color: #000000;
+    align-items: center;
+    justify-content: center; 
+    flex-direction: column;
+    height: 96px;
+    color: #ffffff;
+    text-align: center;
+    font-size: large;
+  }
